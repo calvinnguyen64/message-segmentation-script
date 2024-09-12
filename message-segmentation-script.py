@@ -11,12 +11,15 @@ def message_segementation(string_to_convert, character_limit):
         if count % character_limit == 0:
             result = result + "\n\n--------------------------------------------\n\n"
         else: result+="{}".format(character)
-        #ToDo if keyword "IMAGE " is typed in the document (case-sensitive), replace the word and create a space that notifies the user to paste in their image when pasting over the message
+        #if keyword "IMAGE " is typed in the document (case-sensitive), replace the word and create a space that notifies the user to paste in their image when pasting over the message
+        if count >= 6 and ''.join(string_to_convert[count - 6:count]) == "IMAGE ":
+            result = result[:-6]
+            result += ("\n\nPASTE IMAGE HERE\n\n")
     return result
 
-with open("message_to_paste.txt", "r", encoding='utf-8') as file_to_read:
+with open("original_message_to_read.txt", "r", encoding='utf-8') as file_to_read:
     lines = file_to_read.readlines()
-    with open("paste_message.txt", "w", encoding='utf-8') as file_to_write:
+    with open("formatted_message_to_paste.txt", "w", encoding='utf-8') as file_to_write:
         file_to_write.write(message_segementation(''.join(lines), 2000)) #run function with 2000 character limit
 
 #ToDo ask for keyboard input of how character limit
