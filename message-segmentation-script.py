@@ -8,9 +8,13 @@ def message_segementation(string_to_convert, character_limit):
 
     for character in string_to_convert:
         count+=1
+        # if character limit is hit, crop message to the last known space character and create a segment line to notify user where to copy paste to reach character limit
         if count % character_limit == 0:
-            result = result + "\n\n--------------------------------------------\n\n"
+            last_space_index = result.rfind(" ")
+            if last_space_index != -1: # if there is a space character
+                result = result[:last_space_index] + "\n\n--------------------------------------------\n\n" + result[last_space_index + 1:] + character # replaces text where the last space character is with new line character and append the rest of the next word to the next line
         else: result+="{}".format(character)
+
         #if keyword "IMAGE " is typed in the document (case-sensitive), replace the word and create a space that notifies the user to paste in their image when pasting over the message
         if count >= 6 and ''.join(string_to_convert[count - 6:count]) == "IMAGE ":
             result = result[:-6]
