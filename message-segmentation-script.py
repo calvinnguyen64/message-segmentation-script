@@ -13,7 +13,7 @@ def message_segementation(string_to_convert, character_limit):
             last_space_index = result.rfind(" ")
             if last_space_index != -1: # if there is a space character
                 result = result[:last_space_index] + "\n\n--------------------------------------------\n\n" + result[last_space_index + 1:] + character # replaces text where the last space character is with new line character and append the rest of the next word to the next line
-        else: result+="{}".format(character)
+        else: result += character
 
         # if keyword "IMAGE " is typed in the document (case-sensitive), replace the word and create a space that notifies the user to paste in their image when pasting over the message
         if count >= 6 and ''.join(string_to_convert[count - 6:count]) == "IMAGE ":
@@ -23,10 +23,18 @@ def message_segementation(string_to_convert, character_limit):
 
 with open("original_message_to_read.txt", "r", encoding='utf-8') as file_to_read:
     lines = file_to_read.readlines()
-    with open("formatted_message_to_paste.txt", "w", encoding='utf-8') as file_to_write:
-        file_to_write.write(message_segementation(''.join(lines), 2000)) #run function with 2000 character limit
+    while True:
+        character_limit = input("Please enter a character limit: ")
+        if character_limit.isdigit():
+            # Convert to integer once validated
+            character_limit = int(character_limit)
+            break
+        print("Invalid input. Please enter a valid whole number.")
+    print(f"Character limit set to: {character_limit}")
 
-#ToDo ask for keyboard input of how character limit
+    with open("formatted_message_to_paste.txt", "w", encoding='utf-8') as file_to_write:
+        file_to_write.write(message_segementation(''.join(lines), character_limit)) #run function with designated character limit
+print("Successfully segmented the message.")
 
 #ToDo Tests
 #assert that IMAGE not in result
