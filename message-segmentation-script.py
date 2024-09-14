@@ -46,6 +46,6 @@ print("Successfully segmented the message.")
 # test 1 empty txt file || assert result = ''
 # test 2 txt file has less character limit and no IMAGE || assert result = result
 # test 3 if spacing goes back to previous space correctly if character limit is in the middle of a word || assert that end of string cuts off assert with result = 'exact string where words are cut off'
-# test 4 if I have exact mutliple of 2000s (ex 6000) what happens to the new line at the end? expectation is nothing 
-# test 5 has image, does paste image 
+# test 4 if I have exact mutliple of 2000s (ex 6000) what happens to the new line at the end? expectation is nothing
+# test 5 has image, does paste image
 # test 6 has no image
